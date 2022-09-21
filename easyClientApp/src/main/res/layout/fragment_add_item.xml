@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.easy.ui.viewmodels.ItemViewModel"/>
+    </data>
+    <FrameLayout
+        android:id="@+id/add_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.mainMenu.fragments.AddItemFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+            <EditText
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="5dp"
+                android:ems="10"
+                android:hint="Item title"
+                android:inputType="textPersonName"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="153dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Switch
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Location on"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/timestamp"
+                        android:layout_width="match_parent"
+                        android:layout_height="124dp"
+                        android:layout_weight="0.4"
+                        android:baselineAligned="false"
+                        android:hint="Time"
+                        android:text="@{viewmodel.timeString}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/user"
+                        android:layout_width="match_parent"
+                        android:layout_height="124dp"
+                        android:layout_weight="0.4"
+                        android:baselineAligned="false"
+                        android:hint="Display Name"
+                        android:text="@{viewmodel.user.displayName}"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/addImageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:backgroundTint="#FFFFFF"
+                    android:baselineAlignBottom="false"
+                    android:gravity="fill"
+                    android:onClick="performClick"
+                    android:scaleType="fitEnd"
+                    android:src="@{viewmodel.activeItemImageUri}" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/Item_text"
+                android:layout_width="match_parent"
+                android:layout_height="223dp"
+                android:layout_margin="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:ems="10"
+                android:hint="Item description"
+                android:inputType="textPersonName" />
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

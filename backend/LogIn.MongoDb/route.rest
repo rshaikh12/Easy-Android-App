@@ -1,0 +1,9 @@
+Post http://localhost:3001/registration
+Content-Type: application/json
+
+{
+    "firstName": "Alexander",
+    "secondName": "Kobler",
+    "email": "Peter.Kobler@web.de",
+    "password": "hallo"
+}

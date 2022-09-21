@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Easy</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_validation">Enter the password again</string>
+    <string name="prompt_firstName">First Name</string>
+    <string name="prompt_secondName">Second Name</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="productive_url">"http://msp-ss2021-5.mobile.ifi.lmu.de:443/"</string>
+    <string name="local_url1">"http://192.168.0.216:443/"</string>
+    <string name="local_url2">"http://192.168.0.14:443/"</string>
+    <string name="local_url3">"http://10.0.2.2:443/"</string>
+
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+
+    <string name="invalid_password2">Passwords must match</string>
+    <string name="invalid_firstName">First name must not be empty</string>
+    <string name="invalid_secondName">Second name must not be empty</string>
+
+    <string name="login_failed">"Login failed"</string>
+    <string name="registration_failed">"Registration failed"</string>
+    <string name="easy_name">"Easy"</string>
+    <string name="main_menu">"Main Menu"</string>
+
+    <string name="search">"Search"</string>
+
+    <string name="add_new_item">"Add new item"</string>
+
+    <string name="profile">"Profile"</string>
+
+    <string name="messages">"Messages"</string>
+
+    <string name="logout">"Log out"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

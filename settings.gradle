@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
+
+include ':easyClientApp'
+rootProject.name = 'gruppe5'

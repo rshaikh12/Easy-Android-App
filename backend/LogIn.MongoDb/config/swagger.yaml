@@ -1,0 +1,466 @@
+/**
+ * @Author Marius Funk
+ The base of the rest api, not 100% final
+ */
+
+
+
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Easy API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:443"
+basePath: "/"
+tags:
+- name: "Easy Rest API"
+- name: "user"
+  description: "Operations about user"
+  externalDocs:
+    description: ""
+    url: "http://swagger.io"
+schemes:
+- "http"
+#- "https"
+paths:
+  /registration:
+    post:
+      tags:
+      - "register"
+      operationId: "register"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref:  "#/definitions/Login"
+      responses:
+        "201":
+          description: "Registered"
+  /login:
+    get:
+      tags:
+      - "login"
+      operationId: "login"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref:  "#/definitions/Login"
+      responses:
+        "201":
+          description: "Logged in"
+  /profile:
+    post:
+      tags:
+      - "profile"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: "Profile created"
+    put:
+      tags:
+      - "profile"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: "Profile updated"
+        "401":
+          description: "Error"
+    get:
+      tags:
+      - "profile"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        required: true
+        name: "userId"
+        type: string
+
+      responses:
+        "200":
+          description: "User profile"
+          schema:
+            $ref: "#/definitions/User"
+  /profile/byLoginId:
+    get:
+      tags:
+      - "profile"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        required: true
+        name: "loginId"
+        type: string
+
+      responses:
+        "200":
+          description: "User profile"
+          schema:
+            $ref: "#/definitions/User"      
+            
+
+  /item:
+    get:
+      tags:
+      - "item"
+      summary: "Finds items nearby"
+      operationId: "findItems"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "latitude"
+        in: "query"
+        description: "User geoposition lat"
+        required: true
+        type: "number"
+      - name: "longditude"
+        in: "query"
+        description: "User geoposition long"
+        required: true
+        type: "number"
+      - name: "range"
+        in: "query"
+        description: "Range of search"
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Item"
+        "400":
+          description: "Invalid status value"
+    post:
+      tags:
+      - "item"
+      summary: "Add a new item"
+      description: ""
+      operationId: "addItem"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Item that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Item"
+      responses:
+        "201": 
+          description: OK
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+      - "item"
+      summary: "Update an existing item"
+      description: ""
+      operationId: "updateItem"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Item"
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Item"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+        "405":
+          description: "Validation exception"
+  /item/findById:
+    get:
+      tags:
+      - "item"
+      summary: "Get a  item by its id"
+      operationId: "getItem"
+      description: ""
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "query"
+        description: "Item object id that needs to be returned"
+        required: true
+        name: "id"
+        type: string
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Item"
+        "405":
+          description: "Invalid input"
+  /item/findByUserId:
+    get:
+      tags:
+      - "item"
+      summary: "Get a  item by its id"
+      operationId: "getItem"
+      description: ""
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "query"
+        description: "Item object id that needs to be returned"
+        required: true
+        name: "userId"
+        type: string
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Item"
+        "405":
+          description: "Invalid input"
+  /chat:
+    get:
+      tags:
+      - "Chat"
+      summary: "Get the chat history between two parties"
+      parameters:
+      - in: "query"
+        description: "loggedInUser"
+        name: "userId1"
+        type: string
+        required: true
+      - in: "query"
+        description: "otherUser"
+        name: "userId2"
+        type: string
+        required: true
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Chat"
+    post:
+      tags:
+      - "Chat"
+      summary: "Post new chat"
+      parameters:
+      - in: "query"
+        description: "loggedInUser"
+        name: "userId"
+        type: string
+        required: true
+      - in: "query"
+        description: "otherUser"
+        name: "otherUserId"
+        type: string
+        required: true
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Chat"
+  /chat/message:
+    post:
+      tags:
+      - "Chat"
+      summary: "Post new message to the chat"
+      parameters:
+      - in: "query"
+        description: "loggedInUser"
+        name: "userId1"
+        type: string
+        required: true
+      - in: "query"
+        description: "otherUser"
+        name: "userId2"
+        type: string
+        required: true
+      - in: "body"
+        description: "Expanded chat" 
+        name: "Chat"
+        schema:
+          $ref: "#/definitions/ChatEntry"
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Chat"
+  /chat/byUserId:
+    get:
+      tags:
+      - "Chat"
+      summary: "Get all chats from one person"
+      parameters:
+      - in: "query"
+        description: "loggedInUser"
+        name: "userId"
+        type: string
+        required: true
+      responses:
+        "201":
+          description: OK
+          schema:
+            $ref: "#/definitions/Chats"
+            
+definitions:
+  Item:
+    type: object
+    properties:
+      id: 
+        type: string
+      userId: 
+        type: string
+      
+      name:
+        type: string
+      description:
+        type: string
+      image:
+        type: string
+        format: binary
+      categories:
+        type: array
+        items:
+          type: string
+      isSold:
+        type: boolean
+        default: false
+      latitude:
+        type: number
+      longditude:
+        type: number
+    required:
+    - id
+    - name
+    - userid
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+      firstName:
+        type: string
+      secondName:
+        type: string
+      email:
+        type: string
+      latitude:
+        type: number
+      longditude:
+        type: number
+      loginId:
+        type: string
+      displayName:
+        type: string
+  Login:
+    type: object
+    properties:
+      loginId:
+        type: string
+      firstName:
+        type: string
+      secondName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      password2:
+        type: string
+    required:
+      - loginId
+  Chats:
+    type: array
+    items:
+      $ref: "#/definitions/Chat"
+  
+  Chat:
+    type: object
+    properties:
+      userId1:
+        type: string
+      userId2:
+        type: string
+      chat:
+        type: array
+        items:
+          $ref: "#/definitions/ChatEntry"
+    required:
+      - userId1
+      - userId2
+  ChatEntry:
+    type: object
+    properties:
+      message:
+        type: string
+      userId:
+        type: string
+      timestamp:
+        type: integer
+  
+      
+    
+        
+    
+    
